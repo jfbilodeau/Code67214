@@ -44,4 +44,4 @@ jobs:
       uses: azure/webapps-deploy@v2
       with:
         app-name: demo67214prod
-        package: . /out/     
+        package: ./out/     
