@@ -15,10 +15,10 @@ jobs:
     - name: Azure Login # Step to login to Azure
       uses: azure/login@v1
       with:
-        client-id: c2748717-2ac3-403c-8cb6-1aa8413bc0e4
-        tenant-id: 14f08b43-3b8c-4f1c-87c5-71e2bb2177f3
-        secret: ${{ secrets.AZURE_CREDENTIALS }}    
-        #   creds: ${{ secrets.AZURE_CREDENTIALS }}
+        creds: "${{ secrets.AZURE_CREDENTIALS }}"
+        # client-id: c2748717-2ac3-403c-8cb6-1aa8413bc0e4
+        # tenant-id: 14f08b43-3b8c-4f1c-87c5-71e2bb2177f3
+        # secret: ${{ secrets.AZURE_CREDENTIALS }}    
 
     - name: Checkout code # Step to checkout the repository code
       uses: actions/checkout@v2
