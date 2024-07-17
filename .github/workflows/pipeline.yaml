@@ -24,7 +24,21 @@ jobs:
       run: dotnet restore
 
     - name: Build # Step to build the project
-      run: dotnet build --no-restore --configuration Release
+      run: dotnet build --no-restore --configuration Release -o out
 
     - name: Test # Step to run unit tests
       run: dotnet test --no-build --verbosity normal --configuration Release
+
+    - name: Azure Login # Step to login to Azure
+      uses: azure/login@v1
+      with:
+        creds: ${{ secrets.AZURE_CREDENTIALS }}
+
+    - name: Deploy Bicep Template # Step to deploy the Bicep template
+      run: az deployment group create --resource-group Demo67214 --template-file arm/deploy.bicep --parameters @deploy.prod.parameters.json
+
+    - name: Deploy to Azure Web App # Step to deploy the ASP.NET application to the App Service
+      uses: azure/webapps-deploy@v2
+      with:
+        app-name: demo67214prod
+        package: . /out/     
